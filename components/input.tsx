@@ -3,7 +3,7 @@ interface InputProps {
   type: string;
   required?: boolean;
   placeholder: string;
-  error?: string;
+  errors?: string[];
 }
 
 export default function Input({
@@ -11,24 +11,29 @@ export default function Input({
   type,
   required,
   placeholder,
-  error,
+  errors = [],
 }: InputProps) {
   return (
     <div>
-      <div
-        className={`border border-gray-600 rounded-full w-full 
-          ${error && "border-red-600 has-[:focus]:ring-red-600"}
-      `}
-      >
+      <div>
         <input
           name={name}
           type={type}
           placeholder={placeholder}
           required={required}
-          className="w-full bg-white py-2.5 pl-12 pr-5 outline-0"
+          className={`w-full h-12 pl-11 rounded-3xl bg-transparent text-stone-600 border placeholder:text-stone-400 focus:outline-none focus:ring focus:ring-offset-2 transition ${
+            errors.length > 0
+              ? "border-red-500 focus:ring-red-400"
+              : "border-stone-400 focus:ring-stone-300"
+          }`}
         />
       </div>
-      {error && <p className="text-red-600 my-1 text-sm">{error}</p>}
+      {/* {error && <p className="text-red-600 my-1 text-sm">{error}</p>} */}
+      {errors.map((error, index) => (
+        <span key={index} className="pt-2 pl-1 text-red-400">
+          {error}
+        </span>
+      ))}
     </div>
   );
 }
