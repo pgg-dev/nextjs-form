@@ -28,7 +28,6 @@ export default function Input({
           }`}
         />
       </div>
-      {/* {error && <p className="text-red-600 my-1 text-sm">{error}</p>} */}
       {errors.map((error, index) => (
         <span key={index} className="pt-2 pl-1 text-red-400">
           {error}

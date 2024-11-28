@@ -15,19 +15,19 @@ export default function Home() {
           name="email"
           type="email"
           placeholder="Email"
-          errors={state?.fieldErrors.email}
+          errors={state?.error?.fieldErrors.email}
         />
         <Input
           name="username"
           type="string"
           placeholder="Username"
-          errors={state?.fieldErrors.username}
+          errors={state?.error?.fieldErrors.username}
         />
         <Input
           name="password"
           type="password"
           placeholder="Password"
-          errors={state?.fieldErrors.password}
+          errors={state?.error?.fieldErrors.password}
         />
         <Button>Log in</Button>
       </form>
