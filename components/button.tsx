@@ -1,19 +1,21 @@
 "use client";
 
-import { useFormStatus } from "react-dom";
 import { ButtonHTMLAttributes } from "react";
+import { useFormStatus } from "react-dom";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
-
-export default function Button(props: ButtonProps) {
+export default function Button({
+  text,
+  ...rest
+}: { text: string } & ButtonHTMLAttributes<HTMLButtonElement>) {
   const { pending } = useFormStatus();
+
   return (
     <button
-      {...props}
+      className="w-full h-12 rounded-3xl py-2 font-medium text-stone-600 bg-stone-200 hover:bg-stone-200 active:bg-stone-100 transition-colors disabled:cursor-not-allowed disabled:text-stone-400 disabled:bg-stone-200"
       disabled={pending}
-      className="bg-stone-200 py-3 rounded-full"
+      {...rest}
     >
-      {pending ? "Loading..." : props.children}
+      {pending ? "Loading..." : text}
     </button>
   );
 }
