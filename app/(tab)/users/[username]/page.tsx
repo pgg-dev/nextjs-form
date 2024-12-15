@@ -6,9 +6,10 @@ import ListTweet from "@/components/list-tweet";
 export default async function UserProfile({
   params,
 }: {
-  params: { username: string };
+  params: Promise<{ username: string }>;
 }) {
-  const user = await getUserInfoByName(params.username);
+  const { username } = await params;
+  const user = await getUserInfoByName(username);
   const loggedInUser = await getUserInfoBySession();
 
   return (
@@ -19,7 +20,7 @@ export default async function UserProfile({
             <h3 className="text-xl font-semibold">{user.username}</h3>
             <small className="text-stone-400">{user.email}</small>
           </div>
-          {params.username === loggedInUser.username && (
+          {username === loggedInUser.username && (
             <Link
               className="ml-auto w-fit p-3 bg-rose-400 text-white hover:bg-stone-200 active:bg-stone-100 transition-colors rounded-2xl "
               href={`/users/${loggedInUser.username}/edit`}
