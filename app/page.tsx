@@ -1,7 +1,6 @@
 import TweetList from "@/components/tweet-list";
 import { getInitialTweets } from "../service/tweetService";
 import AddTweet from "../components/add-tweet";
-import { neon } from "@neondatabase/serverless";
 
 export default async function MainPage() {
   const tweets = await getInitialTweets();
