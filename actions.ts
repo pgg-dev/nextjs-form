@@ -2,7 +2,7 @@
 
 import { typeToFlattenedError, z } from "zod";
 
-const USERNAME_MIN_LENGTH = 5;
+const USERNAME_MIN_LENGTH = 3;
 const PASSWORD_MIN_LENGTH = 10;
 const PASSWORD_REGEX = /^(?=.*\d).{10,}$/;
 
@@ -24,17 +24,15 @@ const formSchema = z.object({
       USERNAME_MIN_LENGTH,
       `Username should be at least ${USERNAME_MIN_LENGTH} characters long.`
     ),
-  password: z
-    .string()
-    .trim()
-    .min(
-      PASSWORD_MIN_LENGTH,
-      `Password should be at least ${PASSWORD_MIN_LENGTH} characters long.`
-    )
-    .regex(
-      PASSWORD_REGEX,
-      "Password should contain at least one number (0-9)."
-    ),
+  password: z.string().trim(),
+  // .min(
+  //   PASSWORD_MIN_LENGTH,
+  //   `Password should be at least ${PASSWORD_MIN_LENGTH} characters long.`
+  // )
+  // .regex(
+  //   PASSWORD_REGEX,
+  //   "Password should contain at least one number (0-9)."
+  // ),
 });
 
 interface FormState {
@@ -55,6 +53,7 @@ export async function createAccount(
     password: formData.get("password"),
   };
   const result = formSchema.safeParse(data);
+
   if (result.success) {
     return {
       error: null,
