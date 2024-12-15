@@ -2,9 +2,14 @@ import { notFound } from "next/navigation";
 import ProfileEditForm from "@/components/profile-edit-form";
 import { getUserInfoBySession } from "@/service/userService";
 
-export default async function ProfileEditPage({ params }: { params: { username: string } }) {
+export default async function ProfileEditPage({
+  params,
+}: {
+  params: Promise<{ username: string }>;
+}) {
   const user = await getUserInfoBySession();
-  if (user.username !== params.username) {
+  const { username } = await params;
+  if (user.username !== username) {
     notFound();
   }
   return (
