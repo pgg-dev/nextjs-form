@@ -1,9 +1,11 @@
 import TweetList from "@/components/tweet-list";
 import { getInitialTweets } from "../service/tweetService";
 import AddTweet from "../components/add-tweet";
+import { neon } from "@neondatabase/serverless";
 
 export default async function MainPage() {
   const tweets = await getInitialTweets();
+
   return (
     <div className="p-5 flex flex-col gap-5">
       <AddTweet />
